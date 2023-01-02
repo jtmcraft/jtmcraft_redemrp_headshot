@@ -14,3 +14,11 @@ create table if not exists jtmcraft_headshot (
     created_date int(11) not null default unix_timestamp(),
     primary key (id)
 ) engine=InnoDB default charset=utf8;
+
+create table if not exists jtmcraft_weapons (
+    id int not null auto_increment,
+    weapon_name varchar(255) not null,
+    weapon_hash int not null,
+    created_date int(11) not null default unix_timestamp(),
+    primary key (id)
+) engine=InnoDB default charset=utf8;

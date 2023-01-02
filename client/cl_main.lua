@@ -11,7 +11,8 @@ Citizen.CreateThread(function()
       if killerId == myPedId then
         local isVictimPlayer = 0
         local weaponHash = shot[5]
-        -- local weaponName = GetWeaponName(weaponHash)
+
+        print(tostring(0xE1D2B317) .. "; " .. tostring(weaponHash))
   
         if IsPedAPlayer(victimId) then
           isVictimPlayer = 1
