@@ -1,5 +1,6 @@
 create table if not exists jtmcraft_headshot (
     id int not null auto_increment,
+    user_identifier varchar(50) not null,
     shooter_first_name varchar(255) not null,
     shooter_last_name varchar(255) not null,
     shooter_x double(11,2) not null,
