@@ -13,7 +13,6 @@ client_scripts {
 
 server_scripts {
     '@mysql-async/lib/MySQL.lua',
-    'server/sv_database.lua',
     'server/sv_main.lua'
 }
 

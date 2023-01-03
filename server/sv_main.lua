@@ -24,12 +24,14 @@ function persistHeadShot(args)
     local columnsList = {
         "user_identifier",
         "shooter_first_name", "shooter_last_name",
-        "shooter_x", "shooter_y", "shooter_z", "shooter_speed",
+        "shooter_x", "shooter_y", "shooter_z",
         "shooter_is_scoped_in", "shooter_used_special_ability",
         "victim_is_player", "victim_is_mounted", "victim_in_vehicle", "victim_in_cover",
-        "victim_x", "victim_y", "victim_z", "victim_speed",
+        "victim_x", "victim_y", "victim_z",
         "ammo_hash", "weapon_hash",
-        "xp", "xp_bonus", "distance"
+        "xp", "xp_bonus", "distance",
+        "state", "town", "lake", "river", "swamp", "ocean", "creek", "pond", "district",
+        "weather", "hour", "minute", "second", "dayOfMonth", "dayOfWeek", "month", "year"
     }
     local columns = "("
     local values = "values ("
@@ -48,8 +50,6 @@ function persistHeadShot(args)
         victim_is_player = args.isVictimPlayer,
         weapon_hash = args.weaponHash,
         ammo_hash = args.ammoHash,
-        shooter_speed = args.shooterSpeed,
-        victim_speed = args.victimSpeed,
         shooter_is_scoped_in = args.isShooterScopedIn,
         shooter_used_special_ability = args.isSpecialAbility,
         victim_is_mounted = args.isVictimMounted,
@@ -63,6 +63,23 @@ function persistHeadShot(args)
         victim_z = victim_z,
         xp = args.xp,
         xp_bonus = args.xpBonus,
-        distance = args.distance
+        distance = args.distance,
+        state = args.state,
+        town = args.town,
+        lake = args.lake,
+        river = args.river,
+        swamp = args.swamp,
+        ocean = args.ocean,
+        creek = args.creek,
+        pond = args.pond,
+        district = args.district,
+        weather = args.weather,
+        hour = args.hour,
+        minute = args.minute,
+        second = args.second,
+        dayOfMonth = args.dayOfMonth,
+        dayOfWeek = args.dayOfWeek,
+        month = args.month,
+        year = args.year
     })
 end

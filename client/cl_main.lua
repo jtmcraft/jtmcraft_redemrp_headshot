@@ -12,8 +12,6 @@ Citizen.CreateThread(function()
         local isVictimPlayer = 0
         local weaponHash = shot[5]
         local ammoHash = shot[6]
-        local victimSpeed = shot[8]
-        local killerSpeed = shot[9]
         local isKillerScopedIn = shot[15]
         local isSpecialAbility = shot[16]
         local isVictimMounted = shot[18]
@@ -31,17 +29,36 @@ Citizen.CreateThread(function()
         local distance = Vdist2(x1, y1, z1, x2, y2, z2)
         local xp_bonus = math.floor(distance / 1000)
         local xp = 2
+        local zones = {
+          state = getZoneById(x, y, z, 0),
+          town = getZoneById(x, y, z, 1),
+          lake = getZoneById(x, y, z, 2),
+          river = getZoneById(x, y, z, 3),
+          swamp = getZoneById(x, y, z, 5),
+          ocean = getZoneById(x, y, z, 6),
+          creek = getZoneById(x, y, z, 7),
+          pond =  getZoneById(x, y, z, 8),
+          district = getZoneById(x, y, z, 10)
+        }
+        local weather = getWeather()
+        local gameTime = {
+          hour = GetClockHours(),
+          minute = GetClockMinutes(),
+          second = GetClockSeconds(),
+          dayOfMonth = GetClockDayOfMonth(),
+          dayOfWeek = GetClockDayOfWeek(),
+          month = GetClockMonth(),
+          year = GetClockYear()
+        }
 
         local args = {
           shooterId = killerId,
           victimId = victimId,
           shooterCoords = shooterCoords,
-          shooterSpeed = killerSpeed,
           isShooterScopedIn = isKillerScopedIn,
           isSpecialAbility = isSpecialAbility,
           isVictimPlayer = isVictimPlayer,
           victimCoords = victimCoords,
-          victimSpeed = victimSpeed,
           isVictimMounted = isVictimMounted,
           isVictimInVehicle = isVictimInVehicle,
           isVictimInCover = isVictimInCover,
@@ -49,7 +66,24 @@ Citizen.CreateThread(function()
           weaponHash = weaponHash,
           xp = xp,
           xpBonus = xp_bonus,
-          distance = distance
+          distance = distance,
+          state = zones.state,
+          town = zones.town,
+          lake = zones.lake,
+          river = zones.river,
+          swamp = zones.swamp,
+          ocean = zones.ocean,
+          creek = zones.creek,
+          pond = zones.pond,
+          district = zones.district,
+          weather = weather,
+          hour = gameTime.hour,
+          minute = gameTime.minute,
+          second = gameTime.second,
+          dayOfMonth = gameTime.dayOfMonth,
+          dayOfWeek = gameTime.dayOfWeek,
+          month = gameTime.month,
+          year = gameTime.year
         }
 
         notifyHeadShot(xp + xp_bonus)
@@ -62,4 +96,12 @@ end)
 function notifyHeadShot(xp)
   local text = "Head shot (" .. xp .. " xp)"
   TriggerEvent("redem_roleplay:ShowAdvancedRightNotification", text, "toast_awards_set_h", "awards_set_h_006", "COLOR_PURE_WHITE", 4000)
+end
+
+function getWeather()
+  return "unknown"
+end
+
+function getZoneById(x, y, z, zoneId)
+  return tostring(Citizen.InvokeNative(0x43AD8FC02B429D33, x, y, z, zoneId))
 end
